@@ -1,0 +1,14 @@
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.12.0
+peft>=0.4.0
+bitsandbytes>=0.40.0
+accelerate>=0.20.0
+phonemizer>=3.2.0
+g2p-en>=2.1.0
+nltk>=3.8.0
+sentencepiece>=0.1.99
+scikit-learn>=1.2.0
+tensorboard>=2.12.0 
+jiwer
+huggingface_hub

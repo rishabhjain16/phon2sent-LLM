@@ -1,0 +1,11 @@
+.vscode/
+.history/
+*.tmp
+*.log
+# Do NOT ignore the trained folder
+trained/
+checkpoints/
+# Ignore all trained model folders and checkpoints
+trained/
+trained_ipa/
+WT103_apos/
