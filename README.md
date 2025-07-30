@@ -1,6 +1,6 @@
 # Phoneme-to-Text using LLMs
 
-This repository contains scripts for training and using text-to-phoneme and phoneme-to-text models using both Arpabet (CMUdict/G2P) and IPA phonetic representations.
+This repository provides a complete pipeline for training and evaluating large language models (LLMs) for phoneme-to-text (reconstruction) tasks. It supports both Arpabet (CMUdict/G2P) and International Phonetic Alphabet (IPA) phoneme representations, allowing flexible experimentation with punctuation, word boundaries, and granularity (character-level or word-level). The repo includes scripts for data preprocessing, model training (with LoRA/quantization options), and inference (Phoneme-level, Sentence-level, or JSON-input).
 
 > **Note:** For best results in reconstructing English sentences from phoneme or IPA sequences, it is recommended to use the G2P (Arpabet/CMUdict) mode. This mode is generally more robust for English and less prone to tokenization or vocabulary issues than direct IPA reconstruction.
 
@@ -95,7 +95,7 @@ python infer_g2p.py --model_dir <checkpoint_dir> --phonemes "DH AH K AE M ER AH 
 python infer_ipa.py --model_dir <checkpoint_dir> --ipa "ð ə k æ m ə r ə ɪ z"
 ```
 
-#### Full Pipeline
+#### Sentence -> Phoneme -> Sentence (Reconstruction)
 ```bash
 python infer_g2p.py --model_dir <checkpoint_dir> --sentence "The camera is working well."
 python infer_ipa.py --model_dir <checkpoint_dir> --sentence "The camera is working well."
