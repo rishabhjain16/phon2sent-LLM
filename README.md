@@ -1,3 +1,38 @@
+## Arpabet vs IPA: Quick Example
+
+| Type    | Input (Phonemes/IPA)                  | Output (Text)                |
+|---------|---------------------------------------|------------------------------|
+| Arpabet | DH AH K AE M ER AH IH Z               | The camera is                |
+| IPA     | ð ə k æ m ə r ə ɪ z                   | The camera is                |
+
+**Arpabet** uses ASCII phoneme codes (from CMUdict/G2P), while **IPA** uses international phonetic symbols. Both can be used for phoneme-to-text or text-to-phoneme tasks, but have different vocabularies and tokenization.
+
+### Apostrophes and Punctuation
+
+- **With apostrophes only (e.g., train_g2p.py):**
+  - The model learns to handle contractions (like "don't", "it's") and possessives (like "John's").
+  - Output is more normalized, but will not preserve or generate periods, commas, etc.
+  - Useful for applications where only basic English text is needed, or for speech tasks where punctuation is not pronounced.
+
+- **With more punctuation (apostrophes, periods, commas, etc.) (e.g., train2_g2p.py):**
+  - The model can learn to generate and interpret punctuation in sentences.
+  - Output will more closely match written English, including pauses and sentence boundaries.
+  - Useful for text generation, subtitling, or any use case where punctuation is important.
+
+### Phoneme/IPA Granularity
+
+- **Character-level (char) granularity:**
+  - Each phoneme or IPA character is treated as a separate token.
+  - No explicit word boundaries are preserved in the input or output.
+  - The model focuses on local, fine-grained sound-to-text mapping.
+  - Useful for tasks where word boundaries are ambiguous or not needed, or for languages/scripts with no clear word separation.
+
+- **Word-level (word) granularity:**
+  - Spaces or special tokens are used to mark word boundaries in the phoneme/IPA sequence.
+  - The model can learn to reconstruct word boundaries and handle longer-range dependencies.
+  - Output is more likely to match natural word segmentation in English.
+  - Useful for applications where word-level alignment or readability is important (e.g., ASR, TTS, or text recovery from phonemes).
+
 
 # Phoneme-to-Text using LLMs
 
