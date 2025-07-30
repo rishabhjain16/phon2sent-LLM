@@ -1,4 +1,10 @@
-## Arpabet vs IPA: Quick Example
+# Phoneme-to-Text using LLMs
+
+This repository contains scripts for training and using text-to-phoneme and phoneme-to-text models using both Arpabet (CMUdict/G2P) and IPA phonetic representations.
+
+> **Note:** For best results in reconstructing English sentences from phoneme or IPA sequences, it is recommended to use the G2P (Arpabet/CMUdict) mode. This mode is generally more robust for English and less prone to tokenization or vocabulary issues than direct IPA reconstruction.
+
+## 0. Arpabet vs IPA: Quick Example
 
 | Type    | Input (Phonemes/IPA)                  | Output (Text)                |
 |---------|---------------------------------------|------------------------------|
@@ -7,41 +13,6 @@
 
 **Arpabet** uses ASCII phoneme codes (from CMUdict/G2P), while **IPA** uses international phonetic symbols. Both can be used for phoneme-to-text or text-to-phoneme tasks, but have different vocabularies and tokenization.
 
-### Apostrophes and Punctuation
-
-- **With apostrophes only (e.g., train_g2p.py):**
-  - The model learns to handle contractions (like "don't", "it's") and possessives (like "John's").
-  - Output is more normalized, but will not preserve or generate periods, commas, etc.
-  - Useful for applications where only basic English text is needed, or for speech tasks where punctuation is not pronounced.
-
-- **With more punctuation (apostrophes, periods, commas, etc.) (e.g., train2_g2p.py):**
-  - The model can learn to generate and interpret punctuation in sentences.
-  - Output will more closely match written English, including pauses and sentence boundaries.
-  - Useful for text generation, subtitling, or any use case where punctuation is important.
-
-### Phoneme/IPA Granularity
-
-- **Character-level (char) granularity:**
-  - Each phoneme or IPA character is treated as a separate token.
-  - No explicit word boundaries are preserved in the input or output.
-  - The model focuses on local, fine-grained sound-to-text mapping.
-  - Useful for tasks where word boundaries are ambiguous or not needed, or for languages/scripts with no clear word separation.
-
-- **Word-level (word) granularity:**
-  - Spaces or special tokens are used to mark word boundaries in the phoneme/IPA sequence.
-  - The model can learn to reconstruct word boundaries and handle longer-range dependencies.
-  - Output is more likely to match natural word segmentation in English.
-  - Useful for applications where word-level alignment or readability is important (e.g., ASR, TTS, or text recovery from phonemes).
-
-
-# Phoneme-to-Text using LLMs
-
-This repository contains scripts for training and using text-to-phoneme and phoneme-to-text models using both Arpabet (CMUdict/G2P) and IPA phonetic representations.
-
-> **Note:** For best results in reconstructing English sentences from phoneme or IPA sequences, it is recommended to use the G2P (Arpabet/CMUdict) mode. This mode is generally more robust for English and less prone to tokenization or vocabulary issues than direct IPA reconstruction.
-
-
-wikitext-2 (smaller)    
 
 ## 1. Setup
 
@@ -162,17 +133,31 @@ python print_json_to_csv.py results.json --output my_results.csv
 
 ---
 
-## 5. Tips & Recommendations
+## 5. Ablations:
 
-- For best results in reconstructing English sentences from phoneme or IPA sequences, use the G2P (Arpabet/CMUdict) mode.
-- If your downstream task needs punctuation or word segmentation, train with those features included.
-- For speech-to-text or ASR, word-level and punctuation-aware models are usually better.
-- For phoneme-level analysis or languages/scripts without clear word boundaries, character-level may suffice.
-- Adjust generation parameters in the inference scripts as needed (temperature, repetition_penalty, top_p, top_k).
 
----
+### Apostrophes and Punctuation
 
-## 6. Comparison: Arpabet vs IPA
+- **With apostrophes only (e.g., train_g2p.py):**
+  - The model learns to handle contractions (like "don't", "it's") and possessives (like "John's").
+  - Output is more normalized, but will not preserve or generate periods, commas, etc.
+  - Useful for applications where only basic English text is needed, or for speech tasks where punctuation is not pronounced.
 
-- **Arpabet**: Simpler ASCII, easier to process, less phonetic detail.
-- **IPA**: Universal, more precise, uses Unicode.
+- **With more punctuation (apostrophes, periods, commas, etc.) (e.g., train2_g2p.py):**
+  - The model can learn to generate and interpret punctuation in sentences.
+  - Output will more closely match written English, including pauses and sentence boundaries.
+  - Useful for text generation, subtitling, or any use case where punctuation is important.
+
+### Phoneme/IPA Granularity
+
+- **Character-level (char) granularity:**
+  - Each phoneme or IPA character is treated as a separate token.
+  - No explicit word boundaries are preserved in the input or output.
+  - The model focuses on local, fine-grained sound-to-text mapping.
+  - Useful for tasks where word boundaries are ambiguous or not needed, or for languages/scripts with no clear word separation.
+
+- **Word-level (word) granularity:**
+  - Spaces or special tokens are used to mark word boundaries in the phoneme/IPA sequence.
+  - The model can learn to reconstruct word boundaries and handle longer-range dependencies.
+  - Output is more likely to match natural word segmentation in English.
+  - Useful for applications where word-level alignment or readability is important (e.g., ASR, TTS, or text recovery from phonemes).
