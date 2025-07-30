@@ -43,9 +43,27 @@ brew install espeak-ng
 ```
 
 3. Make sure you have the Llama-2-7b-hf model downloaded:
-```
-/home/experiments/checkpoints/Llama-2-7b-hf
-```
+
+### Downloading the Llama-2-7b-hf Checkpoint
+
+You need to download the Llama-2-7b-hf model weights from Hugging Face before training or inference. You must request access to the model on Hugging Face and accept their terms.
+
+1. Visit: https://huggingface.co/meta-llama/Llama-2-7b-hf
+2. Click "Access repository" and follow the instructions to get permission.
+3. Once approved, install the Hugging Face CLI if you haven't already:
+   ```bash
+   pip install huggingface_hub
+   ```
+4. Log in to your Hugging Face account:
+   ```bash
+   huggingface-cli login
+   ```
+5. Download the model to the required directory:
+   ```bash
+   huggingface-cli download meta-llama/Llama-2-7b-hf --local-dir ./checkpoints/llm --local-dir-use-symlinks False
+   ```
+
+Make sure the `model_name` or `--base_model` argument in your scripts points to `./checkpoints/llm`.
 
 ## Arpabet-based Models
 ## Major Differences: train_g2p.py vs train2_g2p.py

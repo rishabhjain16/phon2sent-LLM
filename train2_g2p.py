@@ -219,7 +219,7 @@ val_pairs = process_texts_to_pairs(validation_texts, "validation")
 # val_pairs = data_pairs[split_idx:]
 
 # 4. Load Llama-2-7b with 4-bit quantization
-model_name = "/home/rijain@ad.mee.tcd.ie/Experiments/proj/VSR-LLM/checkpoints/Llama-2-7b-hf"
+model_name = "./checkpoints/Llama-2-7b-hf"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 

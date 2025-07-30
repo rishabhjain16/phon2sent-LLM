@@ -49,7 +49,7 @@ def load_model(model_dir, base_model_path=None):
             
         # If base model path still not available or is a remote path, use the original model path
         if base_model_path is None or base_model_path.startswith("http"):
-            base_model_path = "/home/rijain@ad.mee.tcd.ie/Experiments/proj/VSR-LLM/checkpoints/Llama-2-7b-hf"
+            base_model_path = "./checkpoints/Llama-2-7b-hf"
             print(f"Using default base model: {base_model_path}")
         
         # Load tokenizer from base model
@@ -318,7 +318,7 @@ def main():
     parser.add_argument("--model_dir", type=str, default="./llama2_phoneme2sentence_g2p/checkpoint-1000",
                         help="Directory containing the fine-tuned model or LoRA adapter")
     parser.add_argument("--base_model", type=str, 
-                        default="/home/rijain@ad.mee.tcd.ie/Experiments/proj/VSR-LLM/checkpoints/Llama-2-7b-hf",
+                        default="./checkpoints/Llama-2-7b-hf",
                         help="Path to the base model (needed for LoRA models)")
     parser.add_argument("--phonemes", type=str,
                         default=None,

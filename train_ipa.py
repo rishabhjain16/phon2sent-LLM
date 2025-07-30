@@ -55,6 +55,8 @@ parser.add_argument("--epochs", type=int, default=6,
                     help="Number of training epochs")
 parser.add_argument("--batch_size", type=int, default=4,
                     help="Batch size per device")
+parser.add_argument("--base_model", type=str, default="./checkpoints/Llama-2-7b-hf",
+                    help="Base model directory")
 args = parser.parse_args()
 
 # Define output directory (used consistently throughout)
@@ -237,7 +239,7 @@ train_pairs = process_texts_to_pairs(train_texts, "training")
 val_pairs = process_texts_to_pairs(validation_texts, "validation")
 
 # 4. Load Llama-2-7b with 4-bit quantization
-model_name = "/home/rijain@ad.mee.tcd.ie/Experiments/proj/VSR-LLM/checkpoints/Llama-2-7b-hf"
+model_name = "./checkpoints/Llama-2-7b-hf"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
@@ -445,4 +447,4 @@ with open(os.path.join(OUTPUT_DIR, "README.md"), "w") as f:
     f.write(f"## Usage\n\n")
     f.write(f"For inference, use either:\n")
     f.write(f"- Latest checkpoint: `{OUTPUT_DIR}/checkpoint-XXXX`\n")
-    f.write(f"- Final model: `{final_model_path}`\n") 
+    f.write(f"- Final model: `{final_model_path}`\n")
